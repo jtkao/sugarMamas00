@@ -59,9 +59,15 @@ nav a:first-child {
 }
 
 .sloganBox h1 {
-  color: black;
+  color: white;
   text-transform: capitalize;
   font-weight: 400;
+  background-color: rgba(19, 35, 47, 0.9);
+  padding: 30px;
+  max-width: 600px;
+  margin: 30px auto;
+  border-radius: 4px;
+  font-style: italic;
 }
 
 .form {
