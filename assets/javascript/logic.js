@@ -79,6 +79,15 @@ $(document).ready(function() {
     setTimeout(function(){window.location.href='index.html', 3000});      
   });
 
+  $('#logoutNoww').on('click', function(){
+    auth.logOut();    
+    //not working, don't know why @todo    
+    // $('.modal-title').html('See you next time, eat well!');
+    // $('#myModal').modal('show');   
+    // setTimeout(function() {$('#myModal').modal('hide');}, 2000);
+    setTimeout(function(){window.location.href='index.html', 3000});      
+  });
+
   $("#signupSubmit").on("click", function() {
     var firstName = $("#signupFn").val().trim();
     var lastName = $("#signupLn").val().trim();
