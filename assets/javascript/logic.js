@@ -67,11 +67,17 @@ $(document).ready(function() {
   auth.logOut = function(){
     console.log("successfully logged out");
     fbAuth.signOut();
-    window.location.href='index.html';
+
   };
 
   $('#logoutNow').on('click', function(){
     auth.logOut();
+    window.location.href='index.html';    
+    
+    //not working, don't know why @todo    
+    // $('.modal-title').html('See you next time, eat well!');
+    // $('#myModal').modal('show');   
+    // setTimeout(function() {$('#myModal').modal('hide');}, 2000);  
   });
 
   $("#signupSubmit").on("click", function() {
