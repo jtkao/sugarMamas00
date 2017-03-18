@@ -258,6 +258,10 @@ footer img {
   color: white;
 }
 
+.modal-title {
+  text-align: center;
+}
+
 @media screen and (max-width: 640px) {
   .smIcons {
     display: none;

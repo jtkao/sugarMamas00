@@ -45,10 +45,17 @@ $(document).ready(function() {
     console.log("login start");
     var $username = $('#loginUser').val().trim();
     var $password = $('#loginPassword').val().trim();        
+    var loginFirstName = ''
 
     fbAuth.signInWithEmailAndPassword($username, $password).catch(function(error){
       console.log(error.message);
     });
+    
+    //if the login was successully, show to modal
+    //$('.modal-title').html('Welcome back' + loginFirstName + '!')
+    $('.modal-title').html('Welcome Back!')
+    $('#myModal').modal('show');
+    setTimeout(function() {$('#myModal').modal('hide');}, 2000);    
 
     $("#loginBox").hide();
     $("#searchBox").show();
@@ -60,9 +67,10 @@ $(document).ready(function() {
   auth.logOut = function(){
     console.log("successfully logged out");
     fbAuth.signOut();
+    window.location.href='index.html';
   };
 
-  $('#logoutSubmit').on('click', function(){
+  $('#logoutNow').on('click', function(){
     auth.logOut();
   });
 
@@ -91,8 +99,12 @@ $(document).ready(function() {
               zipcode: zipcode,
               isr: isr,
               ibr: ibr,
-              email: $username
+              email: $username,
             });
+            //if the login was created successully, show to modal
+            $('.modal-title').html('Welcome ' + firstName + '!')
+            $('#myModal').modal('show');
+            setTimeout(function() {$('#myModal').modal('hide');}, 2000);
           }
         });
       }
