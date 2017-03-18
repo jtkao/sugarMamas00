@@ -225,27 +225,27 @@ $(document).ready(function() {
 
       var spinachServings = Math.round(10*(moreFiber/(0.7)))/10;
       var spinachCalories = Math.round(spinachServings * 7)
-      var spinachX = $("<p>").html("you could eat " + spinachServings +
+      var spinachX = $("<p>").html(spinachServings +
         " cups of spinach, which adds " + spinachCalories + " calories");
 
       var celeryServings = Math.round(10*(moreFiber/(1.6)))/10;
       var celeryCalories = Math.round(celeryServings * 16)
-      var celeryX = $("<p>").html("you could eat " + celeryServings +
+      var celeryX = $("<p>").html(celeryServings +
         " cups of celery, which adds " + celeryCalories + " calories");
 
       var almondServings = Math.round(10*(moreFiber/(11)))/10;
       var almondCalories = Math.round(almondServings * 529);
-      var almondX = $("<p>").html("you could eat " + almondServings +
+      var almondX = $("<p>").html(almondServings +
         " cups of almonds, which adds " + almondCalories + " calories");
 
       var oatmealServings = Math.round(10*(moreFiber/(4)))/10;
       var oatmealCalories = Math.round(oatmealServings * 158);
-      var oatmealX = $("<p>").html("you could eat " + oatmealServings +
+      var oatmealX = $("<p>").html(oatmealServings +
         " cups of oatmeal, which adds " + oatmealCalories + " calories");
 
       var beanServings = Math.round(10*(moreFiber/(30)))/10;
       var beanCalories = Math.round(beanServings * 670);
-      var beanX = $("<p>").html("you could eat " + beanServings +
+      var beanX = $("<p>").html(beanServings +
         " cups of beans, which adds " + beanCalories + " calories");
 
 
@@ -290,20 +290,37 @@ $(document).ready(function() {
             " degrees Fahrenheit outside with " + weatherDescription);
           var conditionX = $("<p>");
 
-          if (condition === "Clouds") {
-            conditionX.html("Maybe you could go for a quick jog.")
+          if ((condition === "Clouds") || (condition === "Clear")) {
+            conditionX.html("You should exercise outside!")
+          } else {
+            conditionX.html("It's raining. Maybe you should go to the gym.")
           };
 
-          $("#outputBox").append(weatherDescriptionX, conditionX);
+          var exerciseBox = $("<div>").attr("id", "exerciseBox");
+          exerciseBox.append("<h3>Exercise Recommendations</h3>");
+
+          bikeTime = Math.round(caloriesX / (650/60));
+          bikeTimeX = $("<p>").html("You could bike for " + bikeTime + " minutes.");
+          exerciseBox.append(weatherDescriptionX, conditionX);
+
+          $("#outputBox").append(exerciseBox);
         });
 
       // output everything
       $("#outputBox").html("");
-      $("#outputBox").append(nameX, servingX, caloriesX, fatsX, carbsX, proteinX,
+      $("#outputBox").append(nameX);
+      var nutritionInfo = $("<div>").attr("id", "nutritionInfo");
+      nutritionInfo.append(servingX, caloriesX, fatsX, carbsX, proteinX,
         sugarX, fiberX);
+      $("#outputBox").append(nutritionInfo);
+      $("#outputBox").append("<br>");
+      var bloodInfo = $("<div>").attr("id", "bloodBox");
+      $("#outputBox").append(bloodInfo);
 
       if ((sugar != undefined) && (fiber != undefined)) {
-        $("#outputBox").append(sugarCalX, moreFiberX, spinachX, celeryX, almondX, oatmealX, beanX);
+        $("#outputBox").append(sugarCalX, moreFiberX);
+        $("#outputBox").append("<h3>You could eat:</h3><br>");
+        $("#outputBox").append(spinachX, celeryX, almondX, oatmealX, beanX);
         database.ref('main/users').child(sessionStorage.active).once("value").then(function(snapshot) {
           if ((snapshot.val().isr === "") && (snapshot.val().ibr === "")) {
             console.log("not diabetic");
@@ -312,7 +329,8 @@ $(document).ready(function() {
             var isrX = $("<p>").html("You will need to take " + insulinNeeded + " doses of insulin.")
             var bsRise = Math.round((snapshot.val().ibr/snapshot.val().isr) * sugar);
             var bsrX = $("<p>").html("Your blood sugar will rise " + bsRise + " units");
-            $("#outputBox").append(bsrX, isrX);
+            $("#bloodBox").append("<h3>Blood Sugar Information:<h3>")
+            $("#bloodBox").append(bsrX, isrX, "<hr>");
           }
         });
       };

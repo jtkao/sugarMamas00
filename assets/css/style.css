@@ -256,6 +256,17 @@ footer img {
 
 .resultsOptions {
   color: white;
+  border: 3px;
+  border-style: solid;
+  border-color: white;
+  padding: 1em;
+}
+
+#nutritionInfo {
+  border: 3px;
+  border-style: solid;
+  border-color: white;
+  padding: 1em;
 }
 
 .modal-title {
