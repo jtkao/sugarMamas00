@@ -71,13 +71,12 @@ $(document).ready(function() {
   };
 
   $('#logoutNow').on('click', function(){
-    auth.logOut();
-    window.location.href='index.html';    
-    
+    auth.logOut();    
     //not working, don't know why @todo    
     // $('.modal-title').html('See you next time, eat well!');
     // $('#myModal').modal('show');   
-    // setTimeout(function() {$('#myModal').modal('hide');}, 2000);  
+    // setTimeout(function() {$('#myModal').modal('hide');}, 2000);
+    setTimeout(function(){window.location.href='index.html', 3000});      
   });
 
   $("#signupSubmit").on("click", function() {
